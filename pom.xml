@@ -393,7 +393,7 @@
                     </execution>
                 </executions>
             </plugin>
-<plugin>
+            <plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
                 <artifactId>replacer</artifactId>
                 <version>1.5.3</version>
@@ -452,7 +452,7 @@
                         </replacement>
                     </replacements>
                 </configuration>
-            </plugin>	    	    	    
+            </plugin>
             <!-- auto-generated java classes should not fail the build on style -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
