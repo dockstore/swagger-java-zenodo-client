@@ -27,4 +27,4 @@ jobs:
           java-version: '17.0.4+8'
           distribution: 'adopt'           
       - name: Build with mvn
-        run: mvn -B -ntp  clean install 
+        run: ./mvnw -B -ntp  clean install
