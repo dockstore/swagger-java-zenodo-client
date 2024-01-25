@@ -70,7 +70,24 @@ public class EntryCreatorExample {
 
         String conceptDoiUrl = publishedDeposit.getLinks().get("parent_doi");
 
+        System.out.println("Success creating concept DOI");
         System.out.println(conceptDoiUrl);
+        System.out.println("Success creating first deposit");
         System.out.println(publishedDeposit);
+
+        // test out second deposit
+        testSecondDeposit(depositApi, actionsApi, publishedDeposit.getId());
+    }
+
+    public static void testSecondDeposit(DepositsApi depositApi, ActionsApi actionsApi, int depositID) {
+        Deposit returnDeposit = actionsApi.newDepositVersion(depositID);
+        String depositURL = returnDeposit.getLinks().get("latest_draft");
+        String depositionIDStr = depositURL.substring(depositURL.lastIndexOf("/") + 1).trim();
+        int depositionID = Integer.parseInt(depositionIDStr);
+        returnDeposit = depositApi.getDeposit(depositionID);
+        DepositMetadata depositMetadata = returnDeposit.getMetadata();
+        String doi = depositMetadata.getPrereserveDoi().getDoi();
+        System.out.println("Success creating second deposit");
+        System.out.println(doi);
     }
 }
