@@ -647,6 +647,7 @@ definitions:
         type: string
       prereserve_doi:
         type: object
+        $ref: '#/definitions/PrereserveDoi'
       keywords:
         type: array
         items:
@@ -726,6 +727,13 @@ definitions:
       - creators
       - description
       - access_right
+  PrereserveDoi:
+    type: object
+    properties:
+      doi:
+        type: string
+      recid:
+        type: integer
   Subject:
     type: object
     properties:
