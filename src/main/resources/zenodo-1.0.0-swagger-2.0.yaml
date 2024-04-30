@@ -531,6 +531,39 @@ paths:
             type: object
         '405':
           description: Method Not Allowed
+  /records/{id}/access/links:
+    post:
+      summary: Create an access link
+      description: Create an access link
+      operationId: createAccessLink
+      tags:
+        - accessLinks
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: Identifier of the record
+        - in: body
+          name: LinkPermissionSettings
+          description: The permission settings for the link.
+          schema:
+            $ref: '#/definitions/LinkPermissionSettings'
+      security:
+        - access_token: [ ]
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AccessLink'
+        '400':
+          description: Method Not Allowed
+        '500':
+          description: Internal Error
 securityDefinitions:
   zenodo_auth:
     type: oauth2
@@ -825,3 +858,36 @@ definitions:
       - filename
       - filesize
       - checksum
+  LinkPermissionSettings:
+    type: object
+    properties:
+      expires_at:
+        type: string
+      permission:
+        enum:
+          - view
+          - preview
+          - edit
+    required:
+      - permission
+  AccessLink:
+    type: object
+    properties:
+      id:
+        type: string
+      created_at:
+        type: string
+      expires_at:
+        type: string
+      permission:
+        enum:
+          - view
+          - preview
+          - edit
+      token:
+        type: string
+    required:
+      - id
+      - created_at
+      - permission
+      - token
