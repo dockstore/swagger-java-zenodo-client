@@ -702,7 +702,7 @@ definitions:
       communities:
         type: array
         items:
-          $ref: '#/definitions/Community'
+          $ref: '#/definitions/DepositMetadataCommunity'
       grants:
         type: array
         items:
@@ -780,6 +780,11 @@ definitions:
     type: object
     properties:
       id:
+        type: string
+  DepositMetadataCommunity:
+    type: object
+    properties:
+      identifier:
         type: string
   RelatedIdentifier:
     type: object
