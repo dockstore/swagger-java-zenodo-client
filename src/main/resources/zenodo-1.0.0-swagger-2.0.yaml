@@ -524,11 +524,16 @@ paths:
         - preview
       produces:
         - application/json
+      parameters:
+        - in: query
+          name: q
+          type: string
+          description: 'Search query (using Elasticsearch query string syntax)'
       responses:
         '200':
           description: OK
           schema:
-            type: object
+            $ref: '#/definitions/SearchResult'
         '405':
           description: Method Not Allowed
   /records/{id}/access/links:
@@ -944,3 +949,23 @@ definitions:
       - created_at
       - permission
       - token
+  SearchResult:
+    type: object
+    properties:
+      hits:
+        type: object
+        properties:
+          hits:
+            type: array
+            items:
+              $ref: '#/definitions/Hit'
+  Hit:
+    type: object
+    properties:
+      id:
+        type: integer
+      related_identifiers:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedIdentifier'
+ 
