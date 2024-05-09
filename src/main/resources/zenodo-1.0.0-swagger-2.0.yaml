@@ -644,7 +644,7 @@ paths:
       parameters:
         - in: path
           name: recordId
-          type: integer
+          type: string
           required: true
       operationId: getRecord
       tags:
@@ -658,7 +658,7 @@ paths:
       parameters:
         - in: path
           name: recordId
-          type: integer
+          type: string
           required: true
       operationId: getRecordVersions
       tags:
