@@ -564,6 +564,29 @@ paths:
           description: Method Not Allowed
         '500':
           description: Internal Error
+  /records/{id}/access/links/{linkId}:
+    delete:
+      summary: Delete an access link
+      description: Delete an access link
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: Identifier of the record
+        - in: path
+          name: linkId
+          type: string
+          required: true
+          description: Identifier of the link
+      operationId: deleteAccessLink
+      tags:
+        - accessLinks
+      security:
+        - access_token: [ ]
+      responses:
+        '204':
+          description: OK
 securityDefinitions:
   zenodo_auth:
     type: oauth2
