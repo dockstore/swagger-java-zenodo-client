@@ -565,6 +565,34 @@ paths:
         '500':
           description: Internal Error
   /records/{id}/access/links/{linkId}:
+    get:
+      summary: Get an access link
+      description: ''
+      operationId: getAccessLink
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: Identifier of the record
+        - in: path
+          name: linkId
+          type: string
+          required: true
+          description: Identifier of the link
+      tags:
+        - accessLinks
+      produces:
+        - application/json
+      security:
+        - access_token: [ ]
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AccessLink'
+        '405':
+          description: Method Not Allowed
     delete:
       summary: Delete an access link
       description: Delete an access link
