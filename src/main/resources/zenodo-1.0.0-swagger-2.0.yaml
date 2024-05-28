@@ -531,6 +531,90 @@ paths:
             type: object
         '405':
           description: Method Not Allowed
+  /records/{id}/access/links:
+    post:
+      summary: Create an access link
+      description: Create an access link
+      operationId: createAccessLink
+      tags:
+        - accessLinks
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: Identifier of the record
+        - in: body
+          name: LinkPermissionSettings
+          description: The permission settings for the link.
+          schema:
+            $ref: '#/definitions/LinkPermissionSettings'
+      security:
+        - access_token: [ ]
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AccessLink'
+        '400':
+          description: Method Not Allowed
+        '500':
+          description: Internal Error
+  /records/{id}/access/links/{linkId}:
+    get:
+      summary: Get an access link
+      description: ''
+      operationId: getAccessLink
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: Identifier of the record
+        - in: path
+          name: linkId
+          type: string
+          required: true
+          description: Identifier of the link
+      tags:
+        - accessLinks
+      produces:
+        - application/json
+      security:
+        - access_token: [ ]
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AccessLink'
+        '405':
+          description: Method Not Allowed
+    delete:
+      summary: Delete an access link
+      description: Delete an access link
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: Identifier of the record
+        - in: path
+          name: linkId
+          type: string
+          required: true
+          description: Identifier of the link
+      operationId: deleteAccessLink
+      tags:
+        - accessLinks
+      security:
+        - access_token: [ ]
+      responses:
+        '204':
+          description: OK
 securityDefinitions:
   zenodo_auth:
     type: oauth2
@@ -748,7 +832,7 @@ definitions:
   Community:
     type: object
     properties:
-      id:
+      identifier:
         type: string
   RelatedIdentifier:
     type: object
@@ -827,3 +911,36 @@ definitions:
       - filename
       - filesize
       - checksum
+  LinkPermissionSettings:
+    type: object
+    properties:
+      expires_at:
+        type: string
+      permission:
+        enum:
+          - view
+          - preview
+          - edit
+    required:
+      - permission
+  AccessLink:
+    type: object
+    properties:
+      id:
+        type: string
+      created_at:
+        type: string
+      expires_at:
+        type: string
+      permission:
+        enum:
+          - view
+          - preview
+          - edit
+      token:
+        type: string
+    required:
+      - id
+      - created_at
+      - permission
+      - token
