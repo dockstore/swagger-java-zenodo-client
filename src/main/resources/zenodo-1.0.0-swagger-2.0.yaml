@@ -549,6 +549,8 @@ definitions:
   Deposit:
     type: object
     properties:
+      conceptdoi:
+        type: string
       conceptrecid:
         type: integer
       created:
