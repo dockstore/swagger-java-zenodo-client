@@ -651,10 +651,14 @@ paths:
         - preview
       produces:
         - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
             $ref: '#/definitions/Record'
   /records/{recordId}/versions:
     get:
-      summary: Get a single record
+      summary: Get a single record's versions
       parameters:
         - in: path
           name: recordId
@@ -671,7 +675,6 @@ paths:
           schema:
             $ref: '#/definitions/SearchResult'
 
->>>>>>> c79fac7 (Save work)
 securityDefinitions:
   zenodo_auth:
     type: oauth2
