@@ -524,11 +524,34 @@ paths:
         - preview
       produces:
         - application/json
+      parameters:
+        - in: query
+          name: q
+          type: string
+          description: 'Search query (using Elasticsearch query string syntax)'
+        - in: query
+          name: sort
+          type: string
+          enum:
+            - "bestmatch"
+            - "newest"
+            - "oldest"
+            - "updated-desc"
+            - "updated-asc"
+            - "version"
+            - "mostviewed"
+            - "mostdownloaded"
+        - in: query
+          name: page
+          type: integer
+        - in: query
+          name: size
+          type: integer
       responses:
         '200':
           description: OK
           schema:
-            type: object
+            $ref: '#/definitions/SearchResult'
         '405':
           description: Method Not Allowed
   /records/{id}/access/links:
@@ -615,6 +638,43 @@ paths:
       responses:
         '204':
           description: OK
+  /records/{recordId}:
+    get:
+      summary: Get a single record
+      parameters:
+        - in: path
+          name: recordId
+          type: string
+          required: true
+      operationId: getRecord
+      tags:
+        - preview
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Record'
+  /records/{recordId}/versions:
+    get:
+      summary: Get a single record's versions
+      parameters:
+        - in: path
+          name: recordId
+          type: string
+          required: true
+      operationId: getRecordVersions
+      tags:
+        - preview
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SearchResult'
+
 securityDefinitions:
   zenodo_auth:
     type: oauth2
@@ -944,3 +1004,45 @@ definitions:
       - created_at
       - permission
       - token
+  SearchResult:
+    type: object
+    properties:
+      hits:
+        type: object
+        properties:
+          hits:
+            type: array
+            items:
+              $ref: '#/definitions/Hit'
+  Hit:
+    type: object
+    properties:
+      id:
+        type: integer
+      doi:
+        type: string
+      doi_url:
+        type: string
+      metadata:
+        type: object
+        properties:
+          related_identifiers:
+            type: array
+            items:
+              $ref: '#/definitions/RelatedIdentifier'
+     
+  Record:
+    type: object
+    properties:
+      id:
+        type: integer
+      conceptrecid:
+        type: integer
+      doi:
+        type: string
+      metadata:
+        type: object
+        related_identifiers:
+          type: array
+          items:
+            $ref: '#/definitions/RelatedIdentifier'
