@@ -1023,6 +1023,8 @@ definitions:
         type: string
       doi_url:
         type: string
+      conceptdoi:
+        type: string
       metadata:
         type: object
         properties:
