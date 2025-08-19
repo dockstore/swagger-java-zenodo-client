@@ -695,8 +695,37 @@ definitions:
         type: integer
       links:
         type: object
-        additionalProperties:
-          type: string
+        properties:
+          conceptdoi:
+            type: string
+          self:
+            type: string
+          html:
+            type: string
+          badge:
+            type: string
+          files:
+            type: string
+          bucket:
+            type: string
+          thumb250:
+            type: string
+          thumbs:
+            type: object
+          latest_draft:
+            type: string
+          latest_draft_html:
+            type: string
+          publish:
+            type: string
+          edit:
+            type: string
+          discard:
+            type: string
+          newversion:
+            type: string
+          parent_doi:
+            type: string
         example:
           conceptdoi: https://doi.org/10.5281/zenodo.705645
       metadata:
