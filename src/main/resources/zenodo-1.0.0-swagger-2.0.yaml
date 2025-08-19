@@ -531,6 +531,84 @@ paths:
             type: object
         '405':
           description: Method Not Allowed
+  /records/{depositId}/draft:
+    delete:
+      summary: Delete a draft deposit
+      description: ''
+      operationId: deleteDraftRecord
+      security:
+        - access_token: []
+      tags:
+        - preview
+      parameters:
+        - in: path
+          name: depositId
+          type: integer
+          required: true
+      responses:
+        '204':
+          description: OK
+        '405':
+          description: Method Not Allowed
+  /user/records:
+    get:
+      summary: List of records for a specific user
+      description: ''
+      operationId: listUserRecords
+      security:
+        - access_token: []
+      parameters:
+        - name: q
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Search query used to filter results based on ElasticSearch's
+            query string syntax.
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
+          description:
+            'Sort search results. Customizable. Built-in options are "bestmatch",
+                  "newest", "oldest", "updated-desc", "updated-asc", "version", "mostviewed",
+                  "mostdownloaded" (default: "bestmatch" or "newest").'
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: string
+          description: "Specify number of items in the results page (default: 10)."
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Specify the page of results.
+        - name: allversions
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: "Specify if all versions should be included (default: False, displays just latest version)."
+        - name: shared_with_me
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: "Seems like undocumented parameter to control if you see everyone's records or just your own"
+      tags:
+        - preview
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Records'
+        '405':
+          description: Method Not Allowed
 securityDefinitions:
   zenodo_auth:
     type: oauth2
@@ -546,6 +624,61 @@ securityDefinitions:
     name: access_token
     in: query
 definitions:
+  Records:
+    type: object
+    properties:
+      hits:
+        $ref: '#/definitions/Hits'
+      aggregations:
+        type: object
+      links:
+        type: object
+  Hits:
+    type: object
+    properties:
+      hits:
+        type: array
+        items:
+          $ref: '#/definitions/Hit'
+      total:
+        type: integer
+  Hit:
+    description: returned by records search, looks a lot like a Deposit but subtly isn't
+    type: object
+    properties:
+      conceptrecid:
+        type: integer
+      created:
+        type: string
+        format: date-time
+      files:
+        type: array
+        items:
+          $ref: '#/definitions/DepositionFile'
+      id:
+        type: integer
+      links:
+        type: object
+        additionalProperties:
+          type: string
+        example:
+          conceptdoi: https://doi.org/10.5281/zenodo.705645
+      modified:
+        type: string
+        format: date-time
+      owner:
+        type: integer
+      record_id:
+        type: integer
+      state:
+        type: string
+      status:
+        type: string
+        description: oddly, this field is populated in a list of records but not when retriving individual deposits
+      submitted:
+        type: boolean
+      title:
+        type: string
   Deposit:
     type: object
     properties:
