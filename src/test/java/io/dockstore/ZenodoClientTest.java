@@ -30,6 +30,7 @@ public class ZenodoClientTest {
     }
 
     @Test
+    @Disabled("worked with my personal token, need to dry run with dockstore-bot")
     public void testZenodoDraftQuery() throws io.swagger.zenodo.client.ApiException {
         ApiClient client = new ApiClient();
         String token = "<token>>";
