@@ -160,7 +160,7 @@ public class EntryCreatorExample {
         ActionsApi actionsApi = new ActionsApi(client);
         Deposit publishedDeposit = actionsApi.publishDeposit(depositionID);
 
-        String conceptDoiUrl = publishedDeposit.getLinks().get("parent_doi");
+        String conceptDoiUrl = publishedDeposit.getLinks().getParentDoi();
 
         System.out.println("Success creating concept DOI");
         System.out.println(conceptDoiUrl);
@@ -173,7 +173,7 @@ public class EntryCreatorExample {
 
     public static void testSecondDeposit(DepositsApi depositApi, ActionsApi actionsApi, int depositID) {
         Deposit returnDeposit = actionsApi.newDepositVersion(depositID);
-        String depositURL = returnDeposit.getLinks().get("latest_draft");
+        String depositURL = returnDeposit.getLinks().getLatestDraft();
         String depositionIDStr = depositURL.substring(depositURL.lastIndexOf("/") + 1).trim();
         int depositionID = Integer.parseInt(depositionIDStr);
         returnDeposit = depositApi.getDeposit(depositionID);
