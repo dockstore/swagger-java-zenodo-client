@@ -806,7 +806,7 @@ definitions:
       links:
         type: object
         additionalProperties:
-          type: string
+          type: object
         example:
           conceptdoi: https://doi.org/10.5281/zenodo.705645
       modified:
