@@ -19,6 +19,7 @@ paths:
       operationId: listCommunities
       tags:
         - preview
+        - invenio
       produces:
         - application/json
       responses:
@@ -474,6 +475,7 @@ paths:
       operationId: listFunders
       tags:
         - preview
+        - invenio
       produces:
         - application/json
       responses:
@@ -522,6 +524,7 @@ paths:
       operationId: listRecords
       tags:
         - preview
+        - invenio
       produces:
         - application/json
       parameters:
@@ -563,6 +566,7 @@ paths:
         - access_token: []
       tags:
         - preview
+        - invenio
       parameters:
         - in: path
           name: depositId
@@ -623,6 +627,7 @@ paths:
           description: "Seems like undocumented parameter to control if you see everyone's records or just your own"
       tags:
         - preview
+        - invenio
       produces:
         - application/json
       responses:
@@ -639,6 +644,7 @@ paths:
       operationId: createAccessLink
       tags:
         - accessLinks
+        - invenio
       consumes:
         - application/json
       produces:
@@ -683,6 +689,7 @@ paths:
           description: Identifier of the link
       tags:
         - accessLinks
+        - invenio
       produces:
         - application/json
       security:
@@ -711,6 +718,7 @@ paths:
       operationId: deleteAccessLink
       tags:
         - accessLinks
+        - invenio
       security:
         - access_token: [ ]
       responses:
@@ -727,6 +735,7 @@ paths:
       operationId: getRecord
       tags:
         - preview
+        - invenio
       produces:
         - application/json
       responses:
@@ -745,6 +754,7 @@ paths:
       operationId: getRecordVersions
       tags:
         - preview
+        - invenio
       produces:
         - application/json
       responses:
@@ -1205,3 +1215,30 @@ definitions:
           type: array
           items:
             $ref: '#/definitions/RelatedIdentifier'
+
+tags:
+  - name: preview
+    description: consider deprecated, these endpoints were described as beta apis in the zenodo documentation. They may not necessarily have made it into the final invenioRDM API (e.g. licenses). For the one's that did, consider the invenio client/tag
+    externalDocs:
+      url: https://developers.zenodo.org/#introduction
+  - name: invenio
+    description: these APIs have been confirmed to have made it into the InvenioRDM documentation (albeit sans return objects)
+    externalDocs:
+      url: https://inveniosoftware.github.io/invenio-openapi/
+  - name: deposits
+    description: consider deprecated, standard zenodo api
+    externalDocs:
+      url: https://developers.zenodo.org/#depositions
+
+  - name: accessLinks
+    description: appear to be invenio API endpoints dealing with accesslinks
+    externalDocs:
+      url: https://inveniordm.docs.cern.ch/reference/rest_api_drafts_records/#access-links
+  - name: actions
+    description: consider deprecated, appear to be zenodo API endpoints dealing with actions
+    externalDocs:
+      url: https://developers.zenodo.org/#deposition-actions
+  - name: files
+    description: consider deprecated, appear to be zenodo API endpoints dealing with files
+    externalDocs:
+      url: https://developers.zenodo.org/#deposition-files
