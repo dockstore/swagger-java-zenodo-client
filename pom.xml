@@ -26,12 +26,12 @@
     <properties>
         <github.url>scm:git:git@github.com:dockstore/swagger-java-zenodo-client.git</github.url>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <dockstore-core.version>1.16.6</dockstore-core.version>
-        <maven-surefire.version>3.4.0</maven-surefire.version>
-        <maven-failsafe.version>2.22.2</maven-failsafe.version>
+        <dockstore-core.version>1.18.2</dockstore-core.version>
+        <maven-surefire.version>3.5.3</maven-surefire.version>
+        <maven-failsafe.version>3.5.3</maven-failsafe.version>
         <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
         <junit-version>4.13.2</junit-version>
-        <jersey.version>3.0.17</jersey.version>
+        <jersey.version>3.0.18</jersey.version>
         <maven-java.version>17</maven-java.version>
     </properties>
 
