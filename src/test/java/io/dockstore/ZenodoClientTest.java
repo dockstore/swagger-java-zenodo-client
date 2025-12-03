@@ -41,7 +41,7 @@ public class ZenodoClientTest {
 
     @Test
     void testConceptDoi() {
-        final SearchResult searchResult = previewApi.listRecords(null, "bestmatch", 1, 100);
+        final SearchResult searchResult = previewApi.listRecords(null, "bestmatch", 1, 25);
         assertNotNull(searchResult.getHits().getHits().get(0).getConceptdoi());
         assertNotNull(searchResult.getHits().getHits().get(0).getCreated());
         assertNotNull(searchResult.getHits().getHits().get(0).getModified());
