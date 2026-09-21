@@ -22,9 +22,9 @@ jobs:
           restore-keys: |
            ${{ runner.os }}-maven-
       - name: Set up JDK
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
-          java-version: '21.0.2+13.0.LTS'
-          distribution: 'adopt'           
+          java-version: '21.0.10+7.0.LTS'
+          distribution: 'temurin'
       - name: Build with mvn
         run: ./mvnw -B -ntp  clean install
